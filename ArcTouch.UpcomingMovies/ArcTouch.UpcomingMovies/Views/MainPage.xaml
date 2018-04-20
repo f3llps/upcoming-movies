@@ -4,8 +4,30 @@
              x:Class="ArcTouch.UpcomingMovies.Views.MainPage"
              Title="{Binding Title}">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
-    </StackLayout>
+
+    <ContentPage.Content>
+        <StackLayout>
+            
+        <!--Header-->
+        <StackLayout  BackgroundColor="#081C24" Padding="10" VerticalOptions="StartAndExpand">
+            <Image x:Name="TMDbLogo"  Aspect="AspectFit"  />
+            <Label 
+                   Text="Upcoming Movies" 
+                   HorizontalTextAlignment="Center" 
+                   HorizontalOptions="Center" 
+                   HeightRequest ="20"
+                   FontSize="Small"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
+        </StackLayout>
+
+        <!--Footer-->
+        <StackLayout Padding="5" VerticalOptions="EndAndExpand">
+                <Image x:Name="ArcTouchLogo" Aspect="AspectFit"  />
+        </StackLayout>
+    
+        </StackLayout>
+
+    </ContentPage.Content>
 
 </ContentPage>

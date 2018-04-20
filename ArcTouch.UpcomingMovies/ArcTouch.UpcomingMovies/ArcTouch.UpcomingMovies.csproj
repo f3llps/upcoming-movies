@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\arcTouchLogo.png" />
+    <None Remove="Resources\TMDbLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\TMDbLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ArcTouchLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
     <PackageReference Include="Prism.Unity.Forms" Version="7.0.0.396" />
   </ItemGroup>

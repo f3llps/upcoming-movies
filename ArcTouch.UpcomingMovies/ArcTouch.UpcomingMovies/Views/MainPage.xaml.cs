@@ -12,6 +12,9 @@ namespace ArcTouch.UpcomingMovies.Views
 		public MainPage ()
 		{
 			InitializeComponent ();
-		}
-	}
+            NavigationPage.SetHasNavigationBar(this, false);
+            TMDbLogo.Source = ImageSource.FromResource("ArcTouch.UpcomingMovies.Resources.TMDbLogo.png");
+            ArcTouchLogo.Source = ImageSource.FromResource("ArcTouch.UpcomingMovies.Resources.ArcTouchLogo.png");
+        }
+    }
 }
