@@ -1,16 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ArcTouch.UpcomingMovies.Views.MainPage"
-             Title="{Binding Title}">
+             xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             x:Class="ArcTouch.UpcomingMovies.Views.MainPage">
 
 
     <ContentPage.Content>
         <StackLayout>
 
             <!--Header-->
-            <StackLayout  BackgroundColor="#081C24" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
-                <Image x:Name="TMDbLogo"  Aspect="AspectFit"  />
+            <StackLayout  BackgroundColor="#081C24" 
+                          VerticalOptions="StartAndExpand" 
+                          HorizontalOptions="FillAndExpand">
+                
+                <Image x:Name="TMDbLogo" Aspect="AspectFit"/>
                 <Label 
                    Text="Upcoming Movies" 
                    HorizontalTextAlignment="Center" 
@@ -27,6 +30,12 @@
             <!--Upcoming Movies Listing-->
             <ScrollView  Padding="10,0,0,0" VerticalOptions="Start" HorizontalOptions="Start">
                 <ListView ItemsSource="{Binding Movies, Mode=OneWay}" RowHeight="80">
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="ItemTapped" 
+                                                          Command="{Binding SelectUpcomingMovieCommand}" 
+                                                          EventArgsParameterPath="Item">
+                        </behaviors:EventToCommandBehavior>
+                    </ListView.Behaviors>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -40,20 +49,51 @@
                                             <ColumnDefinition Width="120"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        
-                                        <Image Grid.Row="0" Grid.Column="0" Aspect="AspectFit" Source="{Binding PosterImage}" VerticalOptions="Start" HorizontalOptions="Start"></Image>
-                                        <Grid Grid.Row="0" Grid.Column="1" RowSpacing = "0" ColumnSpacing = "0">
+                                        <Image Grid.Row="0" 
+                                               Grid.Column="0" 
+                                               Aspect="AspectFit" 
+                                               Source="{Binding PosterImage}" 
+                                               VerticalOptions="Start" 
+                                               HorizontalOptions="Start">
+                                        </Image>
+                                        <Grid Grid.Row="0" 
+                                              Grid.Column="1" 
+                                              RowSpacing = "0" 
+                                              ColumnSpacing = "0"
+                                              VerticalOptions="Center"
+                                              HorizontalOptions="Start">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="12"> </RowDefinition>
                                                 <RowDefinition Height="12"></RowDefinition>
                                                 <RowDefinition Height="12"></RowDefinition>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*" ></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}" FontAttributes="Bold" FontSize="Micro" TextColor="Black" VerticalOptions="Start" HorizontalOptions="Start"></Label>
-                                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding ReleaseDate}" FontAttributes="Bold" FontSize="Micro" TextColor="Black" VerticalOptions="Start" HorizontalOptions="Start"></Label>
-                                            <Label Grid.Row="2" Grid.Column="0" Text="{Binding Generes}" FontAttributes="Bold" FontSize="Micro" TextColor="Black" VerticalOptions="Start" HorizontalOptions="Start"></Label>
+                                            <Label Grid.Row="0" 
+                                                   Grid.Column="0" 
+                                                   Text="{Binding Name}" 
+                                                   FontAttributes="Bold" 
+                                                   FontSize="Micro" 
+                                                   TextColor="Black" 
+                                                   VerticalOptions="Start" 
+                                                   HorizontalOptions="Start">    
+                                            </Label>
+                                            <Label Grid.Row="1" 
+                                                   Grid.Column="0" 
+                                                   Text="{Binding ReleaseDate}" 
+                                                   FontAttributes="Bold" 
+                                                   FontSize="Micro" TextColor="Black" VerticalOptions="Start" HorizontalOptions="Start">
+                                            </Label>
+                                            <Label Grid.Row="2" 
+                                                   Grid.Column="0" 
+                                                   Text="{Binding Generes}" 
+                                                   FontAttributes="Bold" 
+                                                   FontSize="Micro" 
+                                                   TextColor="Black" 
+                                                   VerticalOptions="Start" 
+                                                   HorizontalOptions="Start">
+                                            </Label>
                                         </Grid>
                                     </Grid>
                                 </ViewCell.View>

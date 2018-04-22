@@ -2,6 +2,7 @@
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +15,8 @@ namespace ArcTouch.UpcomingMovies.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
         private ITMDbService _TMDbService;
+        private IPageDialogService _pageDialogService;
+        private INavigationService _navigationService;
         private ObservableCollection<MovieViewModel> _movies = new ObservableCollection<MovieViewModel>();
 
         public ObservableCollection<MovieViewModel> Movies
@@ -22,10 +25,29 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             set { SetProperty(ref _movies, value); }
         }
 
-        public MainPageViewModel(INavigationService navigationService, ITMDbService TMDbService) : base(navigationService)
+        public MainPageViewModel(INavigationService navigationService, 
+                                 ITMDbService TMDbService, 
+                                 IPageDialogService pageDialogService) : base(navigationService)
         {
+            _navigationService = navigationService;
             _TMDbService = TMDbService;
-            _movies = _TMDbService.ListAllUpcomingMovies();
+            _pageDialogService = pageDialogService;
+            Movies = _TMDbService.ListAllUpcomingMovies();
+        }
+
+        public DelegateCommand<MovieViewModel> SelectUpcomingMovieCommand
+        {
+            get
+            {
+                return new DelegateCommand<MovieViewModel>((movie) =>
+                {
+                    NavigationParameters parameters = new NavigationParameters
+                    {
+                        { "upcomingMovie", movie }
+                    };
+                    _navigationService.NavigateAsync("DetailsPage", parameters);
+                });
+            }
         }
     }
 }

@@ -34,6 +34,7 @@ namespace ArcTouch.UpcomingMovies
             containerRegistry.Register(typeof(ITMDbService),typeof(InMemoryTMDbService));
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
+            containerRegistry.RegisterForNavigation<DetailsPage>();
         }
     }
 }
