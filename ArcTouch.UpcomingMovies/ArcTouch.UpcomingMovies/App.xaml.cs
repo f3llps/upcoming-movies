@@ -5,6 +5,8 @@ using ArcTouch.UpcomingMovies.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Unity;
+using ArcTouch.UpcomingMovies.Services.Implementations;
+using ArcTouch.UpcomingMovies.Services.Interfaces;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ArcTouch.UpcomingMovies
@@ -29,6 +31,7 @@ namespace ArcTouch.UpcomingMovies
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register(typeof(ITMDbService),typeof(InMemoryTMDbService));
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
         }
