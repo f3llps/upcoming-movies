@@ -1,6 +1,5 @@
 ﻿using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
 
 namespace ArcTouch.UpcomingMovies.ViewModels
 {
@@ -36,6 +35,13 @@ namespace ArcTouch.UpcomingMovies.ViewModels
         {
             get { return _posterImage; }
             set { SetProperty(ref _posterImage, value); }
+        }
+
+        private string _backdropImage;
+        public string BackdropImage
+        {
+            get { return _backdropImage; }
+            set { SetProperty(ref _backdropImage, value); }
         }
 
         private DateTime _releaseDate;

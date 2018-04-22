@@ -1,8 +1,6 @@
-﻿using ArcTouch.UpcomingMovies.Services.Interfaces;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using Prism.Navigation;
 using System;
-using System.Collections.Generic;
 
 namespace ArcTouch.UpcomingMovies.ViewModels
 {

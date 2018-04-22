@@ -16,7 +16,7 @@
                      HorizontalOptions="Center" 
                      Opacity="0.7" />
 
-            <StackLayout VerticalOptions="Center" HorizontalOptions="Center" >
+            <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="35,10,35,10" >
                 <Label Text="{Binding UpcomingMovie.Name, StringFormat='Name: {0}'}" FontSize="7" TextColor="White"/>
                 <Label Text="{Binding UpcomingMovie.ReleaseDate, StringFormat='Release Date: {0}'}" FontSize="7" TextColor="White"/>
                 <Label Text="{Binding UpcomingMovie.Generes, StringFormat='Generes: {0}'}" FontSize="7" TextColor="White" />

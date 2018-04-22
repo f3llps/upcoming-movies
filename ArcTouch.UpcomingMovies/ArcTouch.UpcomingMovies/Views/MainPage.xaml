@@ -29,7 +29,7 @@
 
             <!--Upcoming Movies Listing-->
             <ScrollView  Padding="10,0,0,0" VerticalOptions="Start" HorizontalOptions="Start">
-                <ListView ItemsSource="{Binding Movies, Mode=OneWay}" RowHeight="80">
+                <ListView x:Name="lstViewMovies" RowHeight="80">
                     <ListView.Behaviors>
                         <behaviors:EventToCommandBehavior EventName="ItemTapped" 
                                                           Command="{Binding SelectUpcomingMovieCommand}" 
@@ -76,8 +76,9 @@
                                                    FontAttributes="Bold" 
                                                    FontSize="Micro" 
                                                    TextColor="Black" 
-                                                   VerticalOptions="Start" 
-                                                   HorizontalOptions="Start">    
+                                                   VerticalOptions="CenterAndExpand" 
+                                                   HorizontalOptions="Start"
+>    
                                             </Label>
                                             <Label Grid.Row="1" 
                                                    Grid.Column="0" 
