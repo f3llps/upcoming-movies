@@ -17,7 +17,7 @@
                 <Label 
                    Text="Upcoming Movies" 
                    HorizontalTextAlignment="Center" 
-                   HorizontalOptions="Center" 
+                   HorizontalOptions="CenterAndExpand" 
                    HeightRequest ="20"
                    FontSize="Small"
                    FontAttributes="Bold"
@@ -28,7 +28,7 @@
             <SearchBar Placeholder="Search movie by name" />
 
             <!--Upcoming Movies Listing-->
-            <ScrollView  Padding="10,0,0,0" VerticalOptions="Start" HorizontalOptions="Start">
+            <ScrollView  Padding="10,0,0,0" VerticalOptions="Start" HorizontalOptions="StartAndExpand">
                 <ListView x:Name="lstViewMovies" RowHeight="80">
                     <ListView.Behaviors>
                         <behaviors:EventToCommandBehavior EventName="ItemTapped" 
@@ -53,15 +53,15 @@
                                                Grid.Column="0" 
                                                Aspect="AspectFit" 
                                                Source="{Binding BackdropImage}" 
-                                               VerticalOptions="Start" 
-                                               HorizontalOptions="Start">
+                                               VerticalOptions="StartAndExpand" 
+                                               HorizontalOptions="StartAndExpand">
                                         </Image>
                                         <Grid Grid.Row="0" 
                                               Grid.Column="1" 
                                               RowSpacing = "0" 
                                               ColumnSpacing = "0"
-                                              VerticalOptions="Center"
-                                              HorizontalOptions="Start">
+                                              VerticalOptions="CenterAndExpand"
+                                              HorizontalOptions="StartAndExpand">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="12"> </RowDefinition>
                                                 <RowDefinition Height="12"></RowDefinition>
@@ -84,7 +84,7 @@
                                                    Grid.Column="0" 
                                                    Text="{Binding ReleaseDate}" 
                                                    FontAttributes="Bold" 
-                                                   FontSize="Micro" TextColor="Black" VerticalOptions="Start" HorizontalOptions="Start">
+                                                   FontSize="Micro" TextColor="Black" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
                                             </Label>
                                             <Label Grid.Row="2" 
                                                    Grid.Column="0" 
@@ -92,8 +92,8 @@
                                                    FontAttributes="Bold" 
                                                    FontSize="Micro" 
                                                    TextColor="Black" 
-                                                   VerticalOptions="Start" 
-                                                   HorizontalOptions="Start">
+                                                   VerticalOptions="StartAndExpand" 
+                                                   HorizontalOptions="StartAndExpand">
                                             </Label>
                                         </Grid>
                                     </Grid>
