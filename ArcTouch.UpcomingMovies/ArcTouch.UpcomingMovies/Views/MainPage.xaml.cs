@@ -26,9 +26,7 @@ namespace ArcTouch.UpcomingMovies.Views
                 var inMemoryTMDbService = new InMemoryTMDbService();
                 var result = await inMemoryTMDbService.GetAsync();
                 if (result != null)
-                {
                     lstViewMovies.ItemsSource = result;
-                }
             });
         }
     }

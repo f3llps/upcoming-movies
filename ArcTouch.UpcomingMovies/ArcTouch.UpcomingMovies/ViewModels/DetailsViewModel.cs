@@ -20,7 +20,6 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             set { SetProperty(ref _upcomingMovie, value); }
         }
 
-
         public void OnNavigatedFrom(NavigationParameters parameters)
         {
             throw new NotImplementedException();

@@ -52,7 +52,7 @@
                                         <Image Grid.Row="0" 
                                                Grid.Column="0" 
                                                Aspect="AspectFit" 
-                                               Source="{Binding PosterImage}" 
+                                               Source="{Binding BackdropImage}" 
                                                VerticalOptions="Start" 
                                                HorizontalOptions="Start">
                                         </Image>
