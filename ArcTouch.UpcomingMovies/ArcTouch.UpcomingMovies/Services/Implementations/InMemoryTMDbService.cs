@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
+using ArcTouch.UpcomingMovies.Enums;
 
 namespace ArcTouch.UpcomingMovies.Services.Implementations
 {
@@ -37,12 +38,82 @@ namespace ArcTouch.UpcomingMovies.Services.Implementations
 
                         for (int i = 0; i < movie.results.Count(); i++)
                         {
+                            string genre = "";
+                            foreach (var item in movie.results[i].genre_ids)
+                            {
+                                switch (item)
+                                {
+                                    case (short)GenreEnum.ACTION:
+                                        genre += "Action, ";
+                                        break;
+                                    case (short)GenreEnum.ADVENTURE:
+                                        genre += "Adventure, ";
+                                        break;
+                                    case (short)GenreEnum.ANIMATION:
+                                        genre += "Animation, ";
+                                        break;
+                                    case (short)GenreEnum.COMEDY:
+                                        genre += "Comedy, ";
+                                        break;
+                                    case (short)GenreEnum.CRIME:
+                                        genre += "Crime, ";
+                                        break;
+                                    case (short)GenreEnum.DOCUMENTARY:
+                                        genre += "Documentary, ";
+                                        break;
+                                    case (short)GenreEnum.DRAMA:
+                                        genre += "Drama, ";
+                                        break;
+                                    case (short)GenreEnum.FAMILY:
+                                        genre += "Family, ";
+                                        break;
+                                    case (short)GenreEnum.FANTASY:
+                                        genre += "Fantasy, ";
+                                        break;
+                                    case (short)GenreEnum.HISTORY:
+                                        genre += "History, ";
+                                        break;
+                                    case (short)GenreEnum.HORROR:
+                                        genre += "Horror, ";
+                                        break;
+                                    case (short)GenreEnum.MUSIC:
+                                        genre += "Music, ";
+                                        break;
+                                    case (short)GenreEnum.MYSTERY:
+                                        genre += "Mystery, ";
+                                        break;
+                                    case (short)GenreEnum.ROMANCE:
+                                        genre += "Romance, ";
+                                        break;
+                                    case (short)GenreEnum.SCIENCE_FICTION:
+                                        genre += "Science Fiction, ";
+                                        break;
+                                    case (short)GenreEnum.TV_MOVIE:
+                                        genre += "TV Movie, ";
+                                        break;
+                                    case (short)GenreEnum.THRILLER:
+                                        genre += "Thriller, ";
+                                        break;
+                                    case (short)GenreEnum.WAR:
+                                        genre += "War, ";
+                                        break;
+                                    case (short)GenreEnum.WESTERN:
+                                        genre += "Western, ";
+                                        break;
+                                }
+
+                            }
+
+                            if (!String.IsNullOrEmpty(genre))
+                            genre = genre.Remove(genre.Length - 2, 2) + ".";
+
+
                             var includMovie = new MovieViewModel
                             {
                                 Name = movie.results[i].title,
                                 PosterImage = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{movie.results[i].poster_path}",
                                 ReleaseDate = Convert.ToDateTime(movie.results[i].release_date),
-                                //Generes = movie.results[i].genre_ids.ToString(),
+                                Generes = genre,
                                 Overview = movie.results[i].overview,
                                 BackdropImage = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{movie.results[i].backdrop_path}"
                             };
