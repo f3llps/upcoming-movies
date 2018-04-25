@@ -15,16 +15,15 @@ namespace ArcTouch.UpcomingMovies.Services.Implementations
     {
         private static ObservableCollection<MovieViewModel> _upcomingMovies = new ObservableCollection<MovieViewModel>();
 
-        public async Task<ObservableCollection<MovieViewModel>> GetAsync()
+        public async Task<ObservableCollection<MovieViewModel>> GetAsync(int actualPage =1)
         {
             try
             {
                 HttpClient client = new HttpClient();
-                int actualPage = 1;
                 int totalPages = 99;
 
-                do
-                {
+                //do
+                //{
                     var response = await client.GetAsync($"https://api.themoviedb.org/3/movie/upcoming?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-US&page={actualPage}");
 
                     if (response.StatusCode.Equals(System.Net.HttpStatusCode.OK))
@@ -115,17 +114,14 @@ namespace ArcTouch.UpcomingMovies.Services.Implementations
                                 ReleaseDate = Convert.ToDateTime(movie.results[i].release_date),
                                 Generes = genre,
                                 Overview = movie.results[i].overview,
-                                BackdropImage = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{movie.results[i].backdrop_path}"
-                            };
+                                BackdropImage = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{movie.results[i].backdrop_path}",
+                           };
 
                             var isDuplicated = _upcomingMovies.FirstOrDefault(x => x.Name.Equals(includMovie.Name));
                             if (isDuplicated == null)
                                 _upcomingMovies.Add(includMovie);
                         }
-                        actualPage++;
                     }
-
-                } while (actualPage <= totalPages);
 
                 return _upcomingMovies;
             }
