@@ -45,7 +45,7 @@ namespace ArcTouch.UpcomingMovies.Views
             {
                 var inMemoryTMDbService = new InMemoryTMDbService();
                 var result = await inMemoryTMDbService.GetAsync();
-                lstViewMovies.ItemsSource = result.Where(i => i.Name.Contains(e.NewTextValue));
+                lstViewMovies.ItemsSource = result.Where(i => i.Name.ToLower().Contains(e.NewTextValue.ToLower()));
             }
 
             lstViewMovies.EndRefresh();
