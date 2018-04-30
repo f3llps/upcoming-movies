@@ -41,9 +41,7 @@ namespace ArcTouch.UpcomingMovies.Views
         {
             lstViewMovies.BeginRefresh();
 
-            if (string.IsNullOrWhiteSpace(e.NewTextValue)) ;
-            //lstViewMovies.ItemsSource = Items;
-            else
+            if (!string.IsNullOrWhiteSpace(e.NewTextValue))
             {
                 var inMemoryTMDbService = new InMemoryTMDbService();
                 var result = await inMemoryTMDbService.GetAsync();
