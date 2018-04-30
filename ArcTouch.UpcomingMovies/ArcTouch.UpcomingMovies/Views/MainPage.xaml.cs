@@ -23,16 +23,34 @@ namespace ArcTouch.UpcomingMovies.Views
             lstViewMovies.ItemAppearing += (sender, e) =>
             {
                 var items = this.lstViewMovies.ItemsSource as ObservableCollection<MovieViewModel>;
-                var bIsLastItem = (items.Last() == e.Item);
 
-                if (isLoading)
+                if (items == null)
                     return;
 
-                if (bIsLastItem)
-                {
+                var bIsLastItem = (items.LastOrDefault() == e.Item);
+
+                if (isLoading || !bIsLastItem)
+                    return;
+
                     LoadMoreMovies();
-                }
             };
+        }
+
+
+        private async Task SearchBar_OnTextChangedAsync(object sender, TextChangedEventArgs e)
+        {
+            lstViewMovies.BeginRefresh();
+
+            if (string.IsNullOrWhiteSpace(e.NewTextValue)) ;
+            //lstViewMovies.ItemsSource = Items;
+            else
+            {
+                var inMemoryTMDbService = new InMemoryTMDbService();
+                var result = await inMemoryTMDbService.GetAsync();
+                lstViewMovies.ItemsSource = result.Where(i => i.Name.Contains(e.NewTextValue));
+            }
+
+            lstViewMovies.EndRefresh();
         }
 
         private async Task LoadMoreMovies()

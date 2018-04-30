@@ -4,7 +4,6 @@
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="ArcTouch.UpcomingMovies.Views.MainPage">
 
-
     <ContentPage.Content>
         <StackLayout>
 
@@ -25,7 +24,7 @@
             </StackLayout>
 
             <!--Search Bar-->
-            <SearchBar Placeholder="Search movie by name" />
+            <SearchBar Placeholder="Search movie by name" TextChanged = "SearchBar_OnTextChangedAsync"/>
 
             <!--Upcoming Movies Listing-->
             <ScrollView  Padding="10,0,0,0" VerticalOptions="Start" HorizontalOptions="StartAndExpand">
