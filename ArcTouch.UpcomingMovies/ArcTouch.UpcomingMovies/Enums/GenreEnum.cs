@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ArcTouch.UpcomingMovies.Enums
+﻿namespace ArcTouch.UpcomingMovies.Enums
 {
     public enum GenreEnum
     {

@@ -2,27 +2,43 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ArcTouch.UpcomingMovies.Views.DetailsPage">
     <ContentPage.Content>
-
-        <Grid>
-            <Image Source="{Binding UpcomingMovie.PosterImage}" Aspect="AspectFill" />
-
-            <BoxView Color="Black"
-                     WidthRequest="300"
-                     HeightRequest="200"
-                     VerticalOptions="Center" 
-                     HorizontalOptions="Center" 
-                     Opacity="0.7" />
-
-            <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="35,10,35,10" >
-                <Label Text="{Binding UpcomingMovie.Name, StringFormat='Name: {0}'}" FontSize="7" TextColor="White"/>
-                <Label Text="{Binding UpcomingMovie.ReleaseDate, StringFormat='Release Date: {0}'}" FontSize="7" TextColor="White"/>
-                <Label Text="{Binding UpcomingMovie.Generes, StringFormat='Generes: {0}'}" FontSize="7" TextColor="White" />
-                <Label Text="{Binding UpcomingMovie.Overview, StringFormat='Overview: {0}'}" FontSize="7" TextColor="White"/>
-            </StackLayout>
-        </Grid>
-        
+            <Grid VerticalOptions="FillAndExpand" 
+                  HorizontalOptions="FillAndExpand">
+            <ffimageloading:CachedImage Source="{Binding UpcomingMovie.PosterImage}"  
+	                                            RetryCount = "3"
+	                                            RetryDelay = "100"
+   	                                            TransparencyEnabled = "False"
+                                                Aspect="AspectFit"
+                                                DownsampleToViewSize="True">
+            </ffimageloading:CachedImage>
+                <StackLayout>
+                        <BoxView Color="Black" 
+                                 HorizontalOptions="FillAndExpand" 
+                                 VerticalOptions="CenterAndExpand" 
+                                 HeightRequest="200" 
+                                 Margin="30, 0, 30, 0" 
+                                 Opacity="0.7"/>
+                </StackLayout>
+                <StackLayout VerticalOptions="CenterAndExpand" 
+                             HorizontalOptions="StartAndExpand" 
+                             Padding="35, 10, 35, 10">
+                        <Label Text="{Binding UpcomingMovie.Name, StringFormat='Name: {0}'}" 
+                               FontSize="10" 
+                               TextColor="White"/>
+                        <Label Text="{Binding UpcomingMovie.ReleaseDate, StringFormat='Release Date: {0:d}'}" 
+                               FontSize="10" 
+                               TextColor="White"/>
+                        <Label Text="{Binding UpcomingMovie.Genres, StringFormat='Genres: {0}'}" 
+                               FontSize="10" 
+                               TextColor="White" />
+                        <Label Text="{Binding UpcomingMovie.Overview, StringFormat='Overview: {0}'}" 
+                               FontSize="10" 
+                               TextColor="White"/>
+                </StackLayout>
+            </Grid>
     </ContentPage.Content>
 </ContentPage>

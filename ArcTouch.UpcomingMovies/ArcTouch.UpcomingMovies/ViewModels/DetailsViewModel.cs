@@ -1,37 +1,31 @@
-﻿using Prism.Mvvm;
-using Prism.Navigation;
-using System;
+﻿using Prism.Navigation;
 
 namespace ArcTouch.UpcomingMovies.ViewModels
 {
-    public class DetailsPageViewModel : BindableBase, INavigationAware
+    public class DetailsPageViewModel : ViewModelBase
     {
-        public DetailsPageViewModel(INavigationService navigationService)
-        {
-            _navigationService = navigationService;
-        }
-
-        private INavigationService _navigationService;
+        //Attribues
+        INavigationService _navigationService;
         private MovieViewModel _upcomingMovie;
 
+        //Properties
         public MovieViewModel UpcomingMovie
         {
             get { return _upcomingMovie; }
             set { SetProperty(ref _upcomingMovie, value); }
         }
 
-        public void OnNavigatedFrom(NavigationParameters parameters)
+        //Constructor
+        public DetailsPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            throw new NotImplementedException();
+            _navigationService = NavigationService;
         }
 
-        public void OnNavigatedTo(NavigationParameters parameters)
+        //Methods
+        public override void OnNavigatedTo(NavigationParameters parameters)
         {
-            UpcomingMovie = parameters["upcomingMovie"] as MovieViewModel;
+            UpcomingMovie = parameters["selectedUpcomingMovie"] as MovieViewModel;
         }
 
-        public void OnNavigatingTo(NavigationParameters parameters)
-        {
-        }
     }
 }

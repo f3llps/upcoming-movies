@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcTouch.UpcomingMovies", "ArcTouch.UpcomingMovies\ArcTouch.UpcomingMovies\ArcTouch.UpcomingMovies.csproj", "{B2D237EC-D75D-4C72-91D4-748E74CA8196}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArcTouch.UpcomingMovies", "ArcTouch.UpcomingMovies\ArcTouch.UpcomingMovies\ArcTouch.UpcomingMovies.csproj", "{B2D237EC-D75D-4C72-91D4-748E74CA8196}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcTouch.UpcomingMovies.Android", "ArcTouch.UpcomingMovies\ArcTouch.UpcomingMovies.Android\ArcTouch.UpcomingMovies.Android.csproj", "{54629AF0-74E5-4C4A-AEB3-25506EC11A1B}"
 EndProject

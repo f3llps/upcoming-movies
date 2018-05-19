@@ -1,12 +1,12 @@
 ﻿using Prism;
 using Prism.Ioc;
-using ArcTouch.UpcomingMovies.ViewModels;
 using ArcTouch.UpcomingMovies.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Unity;
-using ArcTouch.UpcomingMovies.Services.Implementations;
 using ArcTouch.UpcomingMovies.Services.Interfaces;
+using ArcTouch.UpcomingMovies.Services.Implementations;
+using Prism.Navigation;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ArcTouch.UpcomingMovies
@@ -30,7 +30,8 @@ namespace ArcTouch.UpcomingMovies
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register(typeof(ITMDbService),typeof(InMemoryTMDbService));
+            containerRegistry.Register(typeof(INavigationService),typeof(PageNavigationService));
+            containerRegistry.Register(typeof(ITMDbService), typeof(InMemoryTMDbServiceViewModel));
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
             containerRegistry.RegisterForNavigation<DetailsPage>();

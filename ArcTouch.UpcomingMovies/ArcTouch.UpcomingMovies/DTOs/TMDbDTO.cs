@@ -1,11 +1,8 @@
-﻿using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-
-namespace ArcTouch.UpcomingMovies.ViewModels
+﻿namespace ArcTouch.UpcomingMovies.DTOs
 {
-    public class TMDbUpcomingMovieViewModel
+    public class TMDbDTO
     {
+
         public results[] results;
         public int page;
         public int total_results;

@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using FFImageLoading.Forms.Touch;
+using Foundation;
 using Prism;
 using Prism.Ioc;
 using UIKit;
@@ -23,7 +24,7 @@ namespace ArcTouch.UpcomingMovies.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App(new iOSInitializer()));
-
+            CachedImageRenderer.Init();
             return base.FinishedLaunching(app, options);
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using FFImageLoading.Forms.Droid;
 using Prism;
 using Prism.Ioc;
 
@@ -17,6 +18,7 @@ namespace ArcTouch.UpcomingMovies.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            CachedImageRenderer.Init(true);
             LoadApplication(new App(new AndroidInitializer()));
         }
     }

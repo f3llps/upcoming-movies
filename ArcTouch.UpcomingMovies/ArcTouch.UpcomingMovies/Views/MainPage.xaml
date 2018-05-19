@@ -1,115 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:local="clr-namespace:ArcTouch.UpcomingMovies.Views"
+             prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ArcTouch.UpcomingMovies.Views.MainPage">
-
     <ContentPage.Content>
         <StackLayout>
-
             <!--Header-->
             <StackLayout  BackgroundColor="#081C24" 
                           VerticalOptions="StartAndExpand" 
                           HorizontalOptions="FillAndExpand">
-                
-                <Image x:Name="TMDbLogo" Aspect="AspectFit"/>
-                <Label 
-                   Text="Upcoming Movies" 
-                   HorizontalTextAlignment="Center" 
-                   HorizontalOptions="CenterAndExpand" 
-                   HeightRequest ="20"
-                   FontSize="Small"
-                   FontAttributes="Bold"
-                   TextColor="White"/>
+                <ffimageloading:CachedImage Source="resource://ArcTouch.UpcomingMovies.Resources.TMDbLogo.png"
+			                                Aspect="AspectFit"
+	                                        RetryCount = "0"
+	                                        RetryDelay = "350"
+	                                        TransparencyEnabled = "False"/>
+				<Label Text="Upcoming Movie"
+                       HorizontalTextAlignment="Center" 
+                       HorizontalOptions="CenterAndExpand" 
+                       HeightRequest ="20"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
             </StackLayout>
-
             <!--Search Bar-->
-            <SearchBar Placeholder="Search movie by name" TextChanged = "SearchBar_OnTextChangedAsync"/>
-
+            <StackLayout VerticalOptions="StartAndExpand">
+                <SearchBar Placeholder= "Search movie by name" 
+                           HorizontalOptions="FillAndExpand">
+                    <SearchBar.Behaviors>
+                        <behaviors:EventToCommandBehavior   EventName="TextChanged" 
+                                                            Command="{Binding SearchUpcomingMovieCommand}"
+                                                            EventArgsParameterPath="NewTextValue"/>
+                    </SearchBar.Behaviors>
+                </SearchBar>
+            </StackLayout>
             <!--Upcoming Movies Listing-->
-            <ScrollView  Padding="10,0,0,0" VerticalOptions="Start" HorizontalOptions="StartAndExpand">
-                <ListView x:Name="lstViewMovies" RowHeight="80">
+            <ScrollView  Padding="3" 
+                         VerticalOptions="StartAndExpand" 
+                         HorizontalOptions="Center">
+                <ListView ItemsSource="{Binding MoviesDownloaded}" 
+                          x:Name ="lstViewMovies"
+                          VerticalOptions="FillAndExpand"
+                          HorizontalOptions="FillAndExpand"
+                          HasUnevenRows ="False"
+                          RowHeight="260"
+                          SeparatorColor="SlateGray"
+                          CachingStrategy="RecycleElement">
                     <ListView.Behaviors>
                         <behaviors:EventToCommandBehavior EventName="ItemTapped" 
                                                           Command="{Binding SelectUpcomingMovieCommand}" 
-                                                          EventArgsParameterPath="Item">
-                        </behaviors:EventToCommandBehavior>
+                                                          EventArgsParameterPath="Item"/>
+
+                        <behaviors:EventToCommandBehavior EventName="ItemAppearing" 
+                                                          Command="{Binding ItemAppearingUpcomingMovieCommand}" 
+                                                          EventArgsParameterPath="Item"/>
                     </ListView.Behaviors>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <ViewCell.View>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="80"></RowDefinition>
-                                            <RowDefinition Height="80"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="120"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Image Grid.Row="0" 
-                                               Grid.Column="0" 
-                                               Aspect="AspectFit" 
-                                               Source="{Binding BackdropImage}" 
-                                               VerticalOptions="StartAndExpand" 
-                                               HorizontalOptions="StartAndExpand">
-                                        </Image>
-                                        <Grid Grid.Row="0" 
-                                              Grid.Column="1" 
-                                              RowSpacing = "0" 
-                                              ColumnSpacing = "0"
-                                              VerticalOptions="CenterAndExpand"
-                                              HorizontalOptions="StartAndExpand">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="12"> </RowDefinition>
-                                                <RowDefinition Height="12"></RowDefinition>
-                                                <RowDefinition Height="12"></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" ></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Grid.Row="0" 
-                                                   Grid.Column="0" 
-                                                   Text="{Binding Name}" 
-                                                   FontAttributes="Bold" 
-                                                   FontSize="Micro" 
-                                                   TextColor="Black" 
-                                                   VerticalOptions="CenterAndExpand" 
-                                                   HorizontalOptions="Start"
->    
-                                            </Label>
-                                            <Label Grid.Row="1" 
-                                                   Grid.Column="0" 
-                                                   Text="{Binding ReleaseDate}" 
-                                                   FontAttributes="Bold" 
-                                                   FontSize="Micro" TextColor="Black" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
-                                            </Label>
-                                            <Label Grid.Row="2" 
-                                                   Grid.Column="0" 
-                                                   Text="{Binding Generes}" 
-                                                   FontAttributes="Bold" 
-                                                   FontSize="Micro" 
-                                                   TextColor="Black" 
-                                                   VerticalOptions="StartAndExpand" 
-                                                   HorizontalOptions="StartAndExpand">
-                                            </Label>
-                                        </Grid>
-                                    </Grid>
+                                    <!-- https://github.com/luberda-molinet/FFImageLoading/wiki/Xamarin.Forms-Advanced -->
+                                    <local:ListViewCachingStrategy/>
                                 </ViewCell.View>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <Grid Padding="6" IsVisible="{Binding IsBusy}">
+                            <Grid.Triggers>
+                                <Trigger TargetType="Grid" 
+                                         Property="IsVisible" 
+                                         Value="False">
+                                    <Setter Property="HeightRequest" 
+                                            Value="0"/>
+                                </Trigger>
+                            </Grid.Triggers>
+                            <Label Text="Loading..." 
+                                   FontSize="20" 
+                                   FontAttributes="Bold"
+                                   TextColor="Black"
+                                   VerticalOptions="StartAndExpand" 
+                                   HorizontalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </ListView.Footer>
                 </ListView>
             </ScrollView>
-
             <!--Footer-->
-            <StackLayout Padding="5" VerticalOptions="EndAndExpand">
-                <Image x:Name="ArcTouchLogo" Aspect="AspectFit"  />
+            <StackLayout Padding="5"
+                         VerticalOptions="EndAndExpand">
+                <ffimageloading:CachedImage Source="resource://ArcTouch.UpcomingMovies.Resources.ArcTouchLogo.png" 
+			                                Aspect="AspectFit"
+	                                        RetryCount = "0"
+	                                        RetryDelay = "250"
+	                                        TransparencyEnabled = "False"/>
             </StackLayout>
-
         </StackLayout>
-
     </ContentPage.Content>
-
 </ContentPage>
