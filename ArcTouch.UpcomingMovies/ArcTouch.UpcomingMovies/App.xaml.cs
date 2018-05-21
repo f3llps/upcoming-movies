@@ -7,6 +7,8 @@ using Prism.Unity;
 using ArcTouch.UpcomingMovies.Services.Interfaces;
 using ArcTouch.UpcomingMovies.Services.Implementations;
 using Prism.Navigation;
+using Plugin.Multilingual;
+using System.Linq;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ArcTouch.UpcomingMovies
@@ -24,6 +26,8 @@ namespace ArcTouch.UpcomingMovies
 
         protected override async void OnInitialized()
         {
+            CrossMultilingual.Current.CurrentCultureInfo = CrossMultilingual.Current.NeutralCultureInfoList.ToList().First(element => element.EnglishName.Contains("English"));
+            AppResources.Culture = CrossMultilingual.Current.CurrentCultureInfo;
             InitializeComponent();
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }

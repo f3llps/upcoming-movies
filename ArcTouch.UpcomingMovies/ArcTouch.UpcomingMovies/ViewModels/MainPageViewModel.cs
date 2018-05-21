@@ -1,5 +1,6 @@
 ﻿using ArcTouch.UpcomingMovies.Services.Implementations;
 using ArcTouch.UpcomingMovies.Services.Interfaces;
+using Plugin.Multilingual;
 using Prism.Commands;
 using Prism.Navigation;
 using System.Collections.ObjectModel;
@@ -42,6 +43,7 @@ namespace ArcTouch.UpcomingMovies.ViewModels
         {
             if (!InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded.Any())
             {
+                InMemoryTMDbServiceViewModel.ActualPage = 1;
                 IsBusy = true;
                 await _inMemoryTMDbService.GetUpcomingMoviesByPageAsync(1);
                 MoviesDownloaded = new ObservableCollection<MovieViewModel>(InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded);
@@ -50,6 +52,42 @@ namespace ArcTouch.UpcomingMovies.ViewModels
         }
 
         //Commands
+
+        public DelegateCommand<string> OnUpdateLanguageClickedCommand
+        {
+            get
+            {
+                return new DelegateCommand<string>(async (language) =>
+                {
+                    switch (language)
+                    {
+                        case "English":
+                            InMemoryTMDbServiceViewModel.Language = "en-US";
+                            break;
+                        case "Portuguese":
+                            InMemoryTMDbServiceViewModel.Language = "pt-BR";
+                            break;
+                        case "Spanish":
+                            InMemoryTMDbServiceViewModel.Language = "es";
+                            break;
+                        case "French":
+                            InMemoryTMDbServiceViewModel.Language = "fr";
+                            break;
+
+                        default:
+                            InMemoryTMDbServiceViewModel.Language = "en-US";
+                            break;
+                    }
+
+                    CrossMultilingual.Current.CurrentCultureInfo = CrossMultilingual.Current.NeutralCultureInfoList.ToList().First(element => element.EnglishName.Contains(language));
+                    AppResources.Culture = CrossMultilingual.Current.CurrentCultureInfo;
+                    InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded = new ObservableCollection<MovieViewModel>();
+                    await InitializeAsync();
+                    MoviesDownloaded = new ObservableCollection<MovieViewModel>(InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded);
+                });
+            }
+        }
+
         public DelegateCommand<MovieViewModel> SelectUpcomingMovieCommand
         {
             get

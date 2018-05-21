@@ -16,6 +16,8 @@
                                     RetryCount = "3"
                                     Margin="0"
                                     RetryDelay = "350"
+                                    FadeAnimationEnabled="True"
+                                    FadeAnimationForCachedImages="True"
                                     TransparencyEnabled = "False"
                                     HorizontalOptions="CenterAndExpand"
                                     VerticalOptions="CenterAndExpand"/>

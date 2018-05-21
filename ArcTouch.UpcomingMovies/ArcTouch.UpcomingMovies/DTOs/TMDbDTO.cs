@@ -2,7 +2,6 @@
 {
     public class TMDbDTO
     {
-
         public results[] results;
         public int page;
         public int total_results;

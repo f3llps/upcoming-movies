@@ -2766,7 +2766,7 @@ namespace ArcTouch.UpcomingMovies.Droid
 			public const int notify_panel_notification_icon_bg = 2130837770;
 			
 			// aapt resource value: 0x7f02010b
-			public const int splash3 = 2130837771;
+			public const int splash = 2130837771;
 			
 			static Drawable()
 			{

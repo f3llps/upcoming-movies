@@ -26,16 +26,16 @@
                 <StackLayout VerticalOptions="CenterAndExpand" 
                              HorizontalOptions="StartAndExpand" 
                              Padding="35, 10, 35, 10">
-                        <Label Text="{Binding UpcomingMovie.Name, StringFormat='Name: {0}'}" 
+                        <Label Text="{Binding Name}" 
                                FontSize="10" 
                                TextColor="White"/>
-                        <Label Text="{Binding UpcomingMovie.ReleaseDate, StringFormat='Release Date: {0:d}'}" 
+                        <Label Text="{Binding ReleaseDate}" 
                                FontSize="10" 
                                TextColor="White"/>
-                        <Label Text="{Binding UpcomingMovie.Genres, StringFormat='Genres: {0}'}" 
+                        <Label Text="{Binding Genres}" 
                                FontSize="10" 
                                TextColor="White" />
-                        <Label Text="{Binding UpcomingMovie.Overview, StringFormat='Overview: {0}'}" 
+                        <Label Text="{Binding Overview}" 
                                FontSize="10" 
                                TextColor="White"/>
                 </StackLayout>

@@ -8,11 +8,28 @@
   <ItemGroup>
     <None Remove="Resources\404.gif" />
     <None Remove="Resources\arcTouchLogo.png" />
+    <None Remove="Resources\english.png" />
+    <None Remove="Resources\french.png" />
     <None Remove="Resources\Loading.gif" />
+    <None Remove="Resources\portuguese.png" />
+    <None Remove="Resources\spanish.png" />
     <None Remove="Resources\TMDbLogo.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\portuguese.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\spanish.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\french.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\english.png" />
     <EmbeddedResource Include="Resources\Loading.gif" />
   </ItemGroup>
 
@@ -32,6 +49,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Plugin.Multilingual" Version="1.0.2" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.3.6" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.3.6" />
     <PackageReference Include="Prism.Unity.Forms" Version="7.0.0.396" />
@@ -40,6 +58,11 @@
   
 
   <ItemGroup>
+    <Compile Update="AppResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Views\DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
     </Compile>
@@ -47,14 +70,13 @@
   
 
   <ItemGroup>
+    <EmbeddedResource Update="AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\ListViewCachingStrategy.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
