@@ -1,9 +1,11 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using FFImageLoading.Forms.Droid;
 using Prism;
 using Prism.Ioc;
+using Xamarin.Forms;
 
 namespace ArcTouch.UpcomingMovies.Droid
 {
@@ -14,6 +16,8 @@ namespace ArcTouch.UpcomingMovies.Droid
               ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+
+
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -23,6 +27,7 @@ namespace ArcTouch.UpcomingMovies.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             CachedImageRenderer.Init(true);
+            UserDialogs.Init(() => (Activity)Forms.Context);
             LoadApplication(new App(new AndroidInitializer()));
         }
     }

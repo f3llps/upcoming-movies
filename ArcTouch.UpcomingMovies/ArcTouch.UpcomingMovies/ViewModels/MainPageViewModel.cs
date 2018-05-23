@@ -1,4 +1,5 @@
-﻿using ArcTouch.UpcomingMovies.Services.Implementations;
+﻿using Acr.UserDialogs;
+using ArcTouch.UpcomingMovies.Services.Implementations;
 using ArcTouch.UpcomingMovies.Services.Interfaces;
 using Plugin.Multilingual;
 using Prism.Commands;
@@ -60,6 +61,11 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             {
                 return new DelegateCommand<string>(async (language) =>
                 {
+                    var toastConfig = new ToastConfig(language);
+                    toastConfig.SetDuration(3000);
+                    toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(12, 131, 193));
+                    UserDialogs.Instance.Toast(toastConfig);
+                    
                     switch (language)
                     {
                         case "English":
