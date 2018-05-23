@@ -62,10 +62,11 @@ namespace ArcTouch.UpcomingMovies.ViewModels
                 return new DelegateCommand<string>(async (language) =>
                 {
                     var toastConfig = new ToastConfig(language);
-                    toastConfig.SetDuration(3000);
-                    toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(12, 131, 193));
+                    toastConfig.SetDuration(2400);
+                    toastConfig.SetPosition(ToastPosition.Top);
+                    toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(47, 79, 79));
                     UserDialogs.Instance.Toast(toastConfig);
-                    
+
                     switch (language)
                     {
                         case "English":
@@ -118,7 +119,6 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             {
                 return new DelegateCommand<MovieViewModel>(async (appearingUpcomingMovie) =>
                 {
-
                     var isLastMovieDownloaded = (InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded.LastOrDefault() == appearingUpcomingMovie) ? true : false;
                     if (!IsBusy && InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded.Any() && isLastMovieDownloaded)
                     {
@@ -141,7 +141,7 @@ namespace ArcTouch.UpcomingMovies.ViewModels
 
                   if (!string.IsNullOrEmpty(keyword))
                   {
-                      var searchedMovies = new ObservableCollection<MovieViewModel>((InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded).Where(i => i.Name.ToLower().Contains(keyword.ToLower())).ToList());
+                      var searchedMovies = new ObservableCollection<MovieViewModel>((InMemoryTMDbServiceViewModel.AllUpcomingMoviesDownloaded).Where(i => i.Name.ToLower().Contains(keyword.ToLower())).ToList());
 
                       if (searchedMovies.Any())
                           MoviesDownloaded = new ObservableCollection<MovieViewModel>(searchedMovies);

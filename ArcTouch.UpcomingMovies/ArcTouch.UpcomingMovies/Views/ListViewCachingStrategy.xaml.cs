@@ -16,8 +16,8 @@ namespace ArcTouch.UpcomingMovies.Views
         protected override void OnBindingContextChanged()
         {
             BackdropImage.Source = null;
-            var item = BindingContext as MovieViewModel;
 
+            var item = BindingContext as MovieViewModel;
             if (item == null)
                 return;
 
