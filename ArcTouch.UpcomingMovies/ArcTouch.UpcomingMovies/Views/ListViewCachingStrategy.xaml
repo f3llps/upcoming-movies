@@ -8,8 +8,12 @@
     
     <Grid RowSpacing = "0" 
           ColumnSpacing="0"  
-          VerticalOptions="StartAndExpand">
-        <ffimageloading:CachedImage x:Name="BackdropImage"
+          VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+         </Grid.RowDefinitions>
+
+                <ffimageloading:CachedImage x:Name="BackdropImage"
                                     Aspect="AspectFill"
                                     HeightRequest="260"
                                     DownsampleToViewSize="True"
@@ -46,7 +50,7 @@
                    Margin="10,0,0,0"
                    FontSize="Micro" 
                    TextColor="White" 
-                   Text="{Binding ReleaseDate, StringFormat=' {0:d}'}" 
+                   Text="{Binding ReleaseDate}" 
                    VerticalOptions="CenterAndExpand" 
                    HorizontalOptions="Start"/>
             <Label Grid.Row="2" 
@@ -56,6 +60,13 @@
                    TextColor="White" 
                    VerticalOptions="CenterAndExpand" 
                    HorizontalOptions="Start"/>
+            <Label Grid.Row="2" 
+                   Text="{Binding DaysLeft}" 
+                   FontSize="Micro"
+                   Margin="10,0,0,0"    
+                   TextColor="White" 
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="End"/>
         </Grid>
     </Grid>
 </ContentView>

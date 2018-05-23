@@ -53,7 +53,7 @@ namespace ArcTouch.UpcomingMovies.ViewModels
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
             UpcomingMovie = parameters["selectedUpcomingMovie"] as MovieViewModel;
-            ReleaseDate = AppResources.Release_Date + UpcomingMovie.ReleaseDate.ToShortDateString().ToString();
+            ReleaseDate = AppResources.Release_Date + UpcomingMovie.ReleaseDate;
             Genres = AppResources.Genres + UpcomingMovie.Genres;
             Overview =  AppResources.Overview + UpcomingMovie.Overview;
             Name = AppResources.Name + UpcomingMovie.Name;

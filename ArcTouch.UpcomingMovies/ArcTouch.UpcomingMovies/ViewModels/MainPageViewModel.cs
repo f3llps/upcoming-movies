@@ -45,6 +45,7 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             {
                 InMemoryTMDbServiceViewModel.ActualPage = 1;
                 IsBusy = true;
+                await _inMemoryTMDbService.GetAllGenres();
                 await _inMemoryTMDbService.GetUpcomingMoviesByPageAsync(1);
                 MoviesDownloaded = new ObservableCollection<MovieViewModel>(InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded);
                 IsBusy = false;

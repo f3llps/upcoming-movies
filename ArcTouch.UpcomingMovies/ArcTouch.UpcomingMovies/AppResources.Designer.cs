@@ -81,9 +81,9 @@ namespace ArcTouch.UpcomingMovies {
         /// <summary>
         ///   Looks up a localized string similar to Not registered..
         /// </summary>
-        internal static string Not_registered1 {
+        internal static string Not_registered {
             get {
-                return ResourceManager.GetString("Not_registered1", resourceCulture);
+                return ResourceManager.GetString("Not_registered", resourceCulture);
             }
         }
         
