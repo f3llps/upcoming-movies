@@ -14,13 +14,13 @@
                           Orientation="Horizontal"
                           VerticalOptions="Start" 
                           HorizontalOptions="FillAndExpand">
+                
                 <ffimageloading:CachedImage Source="resource://ArcTouch.UpcomingMovies.Resources.TMDbLogo.png"
 			                                Aspect="AspectFit"
 	                                        RetryCount = "0"
 	                                        RetryDelay = "350"
 	                                        TransparencyEnabled = "False"/>
-                <StackLayout VerticalOptions="StartAndExpand" 
-                             HorizontalOptions="FillAndExpand">
+               
                 <Label Text="Upcoming Movies"
                        HorizontalTextAlignment="Center" 
                        VerticalTextAlignment="Center"
@@ -29,7 +29,6 @@
                        FontSize="Small"
                        FontAttributes="Bold"
                        TextColor="White"/>
-                </StackLayout>
             </StackLayout>
             <!--Flags- English,  Spanish, French, Portuguese-->
             <StackLayout Orientation="Horizontal" HorizontalOptions="Start" VerticalOptions="Start">
@@ -91,10 +90,9 @@
                     </SearchBar>
                 </StackLayout>
                 <!--Upcoming Movies Listing-->
-            <StackLayout VerticalOptions="FillAndExpand"                                  MinimumHeightRequest="900"
+            <StackLayout VerticalOptions="FillAndExpand"                                  
 > 
                     <ScrollView  Padding="3"
-                                 MinimumHeightRequest="900"
                                  HorizontalOptions="Center"
                                  VerticalOptions="FillAndExpand">
 
@@ -104,7 +102,6 @@
                                   HasUnevenRows ="False"
                                   RowHeight="260"
                                   SeparatorColor="SlateGray"
-                                                                   MinimumHeightRequest="900"
 
                                   CachingStrategy="RecycleElement">
                             <ListView.Behaviors>
@@ -146,7 +143,6 @@
                             </ListView.Footer>
                         </ListView>
                     </ScrollView>
-            </StackLayout>
             <!--Footer-->
             <StackLayout Padding="5"
                              VerticalOptions="End">
@@ -155,7 +151,9 @@
 	                                            RetryCount = "0"
 	                                            RetryDelay = "250"
 	                                            TransparencyEnabled = "False"/>
+                </StackLayout>
             </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

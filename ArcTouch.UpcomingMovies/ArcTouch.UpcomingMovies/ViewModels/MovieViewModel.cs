@@ -68,7 +68,7 @@ namespace ArcTouch.UpcomingMovies.ViewModels
         {
             string genres = "";
             foreach (int genreId in genresIds)
-                genres += InMemoryTMDbServiceViewModel.Genres.First(g => g.Id == genreId).Name + ", ";
+                genres += InMemoryTMDbServiceViewModel.Genres.FirstOrDefault(g => g.Id == genreId).Name + ", ";
                     
             if (!String.IsNullOrEmpty(genres))
                 genres = genres.Remove(genres.Length - 2, 2);

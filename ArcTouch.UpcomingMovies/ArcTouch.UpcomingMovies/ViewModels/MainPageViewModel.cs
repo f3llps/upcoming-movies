@@ -7,6 +7,7 @@ using Prism.Navigation;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Plugin.Connectivity;
 
 namespace ArcTouch.UpcomingMovies.ViewModels
 {
@@ -36,7 +37,17 @@ namespace ArcTouch.UpcomingMovies.ViewModels
         {
             _navigationService = NavigationService;
             _inMemoryTMDbService = inMemoryTMDbService;
-            InitializeAsync();
+
+            if (CrossConnectivity.Current.IsConnected)
+                InitializeAsync();
+            else
+            {
+                var toastConfig = new ToastConfig("Not conected.");
+                toastConfig.SetDuration(4000);
+                toastConfig.SetPosition(ToastPosition.Top);
+                toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(47, 79, 79));
+                UserDialogs.Instance.Toast(toastConfig);
+            }
         }
 
         //Methods
@@ -46,6 +57,7 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             {
                 InMemoryTMDbServiceViewModel.ActualPage = 1;
                 IsBusy = true;
+                MoviesDownloaded = new ObservableCollection<MovieViewModel>();
                 await _inMemoryTMDbService.GetAllGenres();
                 await _inMemoryTMDbService.GetUpcomingMoviesByPageAsync(1);
                 MoviesDownloaded = new ObservableCollection<MovieViewModel>(InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded);
@@ -54,44 +66,54 @@ namespace ArcTouch.UpcomingMovies.ViewModels
         }
 
         //Commands
-
         public DelegateCommand<string> OnUpdateLanguageClickedCommand
         {
             get
             {
                 return new DelegateCommand<string>(async (language) =>
                 {
-                    var toastConfig = new ToastConfig(language);
-                    toastConfig.SetDuration(2400);
-                    toastConfig.SetPosition(ToastPosition.Top);
-                    toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(47, 79, 79));
-                    UserDialogs.Instance.Toast(toastConfig);
 
-                    switch (language)
+                    if (CrossConnectivity.Current.IsConnected)
                     {
-                        case "English":
-                            InMemoryTMDbServiceViewModel.Language = "en-US";
-                            break;
-                        case "Portuguese":
-                            InMemoryTMDbServiceViewModel.Language = "pt-BR";
-                            break;
-                        case "Spanish":
-                            InMemoryTMDbServiceViewModel.Language = "es";
-                            break;
-                        case "French":
-                            InMemoryTMDbServiceViewModel.Language = "fr";
-                            break;
+                        var toastConfig = new ToastConfig(language);
+                        toastConfig.SetDuration(4000);
+                        toastConfig.SetPosition(ToastPosition.Top);
+                        toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(47, 79, 79));
+                        UserDialogs.Instance.Toast(toastConfig);
 
-                        default:
-                            InMemoryTMDbServiceViewModel.Language = "en-US";
-                            break;
+                        switch (language)
+                        {
+                            case "English":
+                                InMemoryTMDbServiceViewModel.Language = "en-US";
+                                break;
+                            case "Portuguese":
+                                InMemoryTMDbServiceViewModel.Language = "pt-BR";
+                                break;
+                            case "Spanish":
+                                InMemoryTMDbServiceViewModel.Language = "es";
+                                break;
+                            case "French":
+                                InMemoryTMDbServiceViewModel.Language = "fr";
+                                break;
+
+                            default:
+                                InMemoryTMDbServiceViewModel.Language = "en-US";
+                                break;
+                        }
+
+                        CrossMultilingual.Current.CurrentCultureInfo = CrossMultilingual.Current.NeutralCultureInfoList.ToList().First(element => element.EnglishName.Contains(language));
+                        AppResources.Culture = CrossMultilingual.Current.CurrentCultureInfo;
+                        InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded = new ObservableCollection<MovieViewModel>();
+                        await InitializeAsync();
                     }
-
-                    CrossMultilingual.Current.CurrentCultureInfo = CrossMultilingual.Current.NeutralCultureInfoList.ToList().First(element => element.EnglishName.Contains(language));
-                    AppResources.Culture = CrossMultilingual.Current.CurrentCultureInfo;
-                    InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded = new ObservableCollection<MovieViewModel>();
-                    await InitializeAsync();
-                    MoviesDownloaded = new ObservableCollection<MovieViewModel>(InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded);
+                    else
+                    {
+                        var toastConfig = new ToastConfig("Not conected.");
+                        toastConfig.SetDuration(4000);
+                        toastConfig.SetPosition(ToastPosition.Top);
+                        toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(47, 79, 79));
+                        UserDialogs.Instance.Toast(toastConfig);
+                    }
                 });
             }
         }
@@ -135,24 +157,35 @@ namespace ArcTouch.UpcomingMovies.ViewModels
         {
             get
             {
-                return new DelegateCommand<string>( (keyword) =>
-              {
-                  IsBusy = true;
+                return new DelegateCommand<string>((keyword) =>
+             {
+                 if (CrossConnectivity.Current.IsConnected)
+                 {
+                     IsBusy = true;
 
-                  if (!string.IsNullOrEmpty(keyword))
-                  {
-                      var searchedMovies = new ObservableCollection<MovieViewModel>((InMemoryTMDbServiceViewModel.AllUpcomingMoviesDownloaded).Where(i => i.Name.ToLower().Contains(keyword.ToLower())).ToList());
+                     if (!string.IsNullOrEmpty(keyword))
+                     {
+                         var searchedMovies = new ObservableCollection<MovieViewModel>((InMemoryTMDbServiceViewModel.AllUpcomingMoviesDownloaded).Where(i => i.Name.ToLower().Contains(keyword.ToLower())).ToList());
 
-                      if (searchedMovies.Any())
-                          MoviesDownloaded = new ObservableCollection<MovieViewModel>(searchedMovies);
-                      else
-                          MoviesDownloaded = new ObservableCollection<MovieViewModel>();
-                  }
-                  else
-                      MoviesDownloaded = new ObservableCollection<MovieViewModel>(InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded);
+                         if (searchedMovies.Any())
+                             MoviesDownloaded = new ObservableCollection<MovieViewModel>(searchedMovies);
+                         else
+                             MoviesDownloaded = new ObservableCollection<MovieViewModel>();
+                     }
+                     else
+                         MoviesDownloaded = new ObservableCollection<MovieViewModel>(InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded);
 
-                  IsBusy = false;
-              });
+                     IsBusy = false;
+                 }
+                 else
+                 {
+                     var toastConfig = new ToastConfig("Not conected.");
+                     toastConfig.SetDuration(4000);
+                     toastConfig.SetPosition(ToastPosition.Top);
+                     toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(47, 79, 79));
+                     UserDialogs.Instance.Toast(toastConfig);
+                 }
+             });
             }
         }
 

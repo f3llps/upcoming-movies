@@ -21,7 +21,7 @@ namespace ArcTouch.UpcomingMovies.Services.Implementations
         INavigationService _navigationService;
 
         //Properties
-        public static List<Genres> Genres { get; set; }
+        public static List<Genres> Genres { get; set; } = new List<Genres>();
         public static string Language { get; set; } = "en-US";
         public static int ActualPage { get; set; } = 1;
         public static ObservableCollection<MovieViewModel> UpcomingMoviesDownloaded { get; set; } = new ObservableCollection<MovieViewModel>();
@@ -69,6 +69,7 @@ namespace ArcTouch.UpcomingMovies.Services.Implementations
         {
             HttpClient client = new HttpClient();
             var additionalPath = "movie/upcoming";
+            AllUpcomingMoviesDownloaded = new ObservableCollection<MovieViewModel>();
 
             for (int countPage = 1, totalPages = 1; countPage <= totalPages; countPage++)
             {
