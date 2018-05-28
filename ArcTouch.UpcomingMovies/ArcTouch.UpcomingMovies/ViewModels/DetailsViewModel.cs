@@ -1,4 +1,8 @@
-﻿using Prism.Navigation;
+﻿using Plugin.Share;
+using Plugin.Share.Abstractions;
+using Prism.Commands;
+using Prism.Navigation;
+using System.Threading.Tasks;
 
 namespace ArcTouch.UpcomingMovies.ViewModels
 {
@@ -42,7 +46,7 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             get { return _releaseDate; }
             set { SetProperty(ref _releaseDate, value); }
         }
-     
+        
         //Constructor
         public DetailsPageViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -58,5 +62,26 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             Overview =  AppResources.Overview + UpcomingMovie.Overview;
             Name = AppResources.Name + UpcomingMovie.Name;
         }
+        public async Task InveteFriend()
+        {
+            var a = new ShareMessage { Title = "Let's watch the release of this movie?", Text = Name, Url = UpcomingMovie.PosterImage };
+            await CrossShare.Current.Share(a, null);
+        }
+
+        //Commands
+        public DelegateCommand InviteFriendCommand
+        {
+            get
+            {
+                return new DelegateCommand(async () =>
+                {
+                    if (!CrossShare.IsSupported)
+                        return;
+
+                    await InveteFriend();
+                });
+            }
+        }
+       
     }
 }

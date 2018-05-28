@@ -5,7 +5,6 @@ using Android.OS;
 using FFImageLoading.Forms.Droid;
 using Prism;
 using Prism.Ioc;
-using Xamarin.Forms;
 
 namespace ArcTouch.UpcomingMovies.Droid
 {
@@ -17,9 +16,11 @@ namespace ArcTouch.UpcomingMovies.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
 
+        internal static MainActivity Instance { get; private set; }
 
         protected override void OnCreate(Bundle bundle)
         {
+            Instance = this;
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -27,7 +28,7 @@ namespace ArcTouch.UpcomingMovies.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             CachedImageRenderer.Init(true);
-            UserDialogs.Init(() => (Activity)Forms.Context);
+            UserDialogs.Init(() => (Activity)Instance);
             LoadApplication(new App(new AndroidInitializer()));
         }
     }

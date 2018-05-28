@@ -39,7 +39,7 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             _inMemoryTMDbService = inMemoryTMDbService;
 
             if (CrossConnectivity.Current.IsConnected)
-                InitializeAsync();
+                 Initialize();
             else
             {
                 var toastConfig = new ToastConfig("Not conected.");
@@ -48,6 +48,11 @@ namespace ArcTouch.UpcomingMovies.ViewModels
                 toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(47, 79, 79));
                 UserDialogs.Instance.Toast(toastConfig);
             }
+        }
+
+        public async void Initialize()
+        {
+            await InitializeAsync();
         }
 
         //Methods
@@ -141,14 +146,17 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             {
                 return new DelegateCommand<MovieViewModel>(async (appearingUpcomingMovie) =>
                 {
-                    var isLastMovieDownloaded = (InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded.LastOrDefault() == appearingUpcomingMovie) ? true : false;
-                    if (!IsBusy && InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded.Any() && isLastMovieDownloaded)
-                    {
-                        IsBusy = true;
-                        await _inMemoryTMDbService.GetUpcomingMoviesByPageAsync(InMemoryTMDbServiceViewModel.ActualPage);
-                        MoviesDownloaded = new ObservableCollection<MovieViewModel>(InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded);
-                        IsBusy = false;
-                    }
+                    //if (InMemoryTMDbServiceViewModel.ActualPage != 1)
+                    //{
+                        var isLastMovieDownloaded = (InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded.LastOrDefault().Id == appearingUpcomingMovie.Id) ? true : false;
+                        if (!IsBusy && InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded.Any() && isLastMovieDownloaded)
+                        {
+                            IsBusy = true;
+                            await _inMemoryTMDbService.GetUpcomingMoviesByPageAsync(InMemoryTMDbServiceViewModel.ActualPage);
+                            MoviesDownloaded = new ObservableCollection<MovieViewModel>(InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded);
+                            IsBusy = false;
+                        }
+                    //}
                 });
             }
         }

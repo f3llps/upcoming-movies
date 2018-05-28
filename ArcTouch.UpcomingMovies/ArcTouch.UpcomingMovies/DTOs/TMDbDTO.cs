@@ -9,7 +9,8 @@
     }
 
     public class results
-    { 
+    {
+        public int id;
         public string title;
         public string poster_path;
         public int[] genre_ids;

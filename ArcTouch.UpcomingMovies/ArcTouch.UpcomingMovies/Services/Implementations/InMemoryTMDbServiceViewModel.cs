@@ -89,6 +89,7 @@ namespace ArcTouch.UpcomingMovies.Services.Implementations
 
                         MovieViewModel includMovie = new MovieViewModel(_navigationService)
                         {
+                            Id = objTMDbDTO.results[i].id,
                             Name = objTMDbDTO.results[i].title,
                             PosterImage = ROOT_IMAGE_PATH + objTMDbDTO.results[i].poster_path,
                             ReleaseDate = date.ToShortDateString(),

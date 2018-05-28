@@ -26,6 +26,7 @@
                        VerticalTextAlignment="Center"
                        HorizontalOptions="CenterAndExpand" 
                        HeightRequest ="20"
+                       Margin="0,0,39,0"
                        FontSize="Small"
                        FontAttributes="Bold"
                        TextColor="White"/>
@@ -92,9 +93,9 @@
                 <!--Upcoming Movies Listing-->
             <StackLayout VerticalOptions="FillAndExpand"                                  
 > 
-                    <ScrollView  Padding="3"
+                    <!--<ScrollView  Padding="3"
                                  HorizontalOptions="Center"
-                                 VerticalOptions="FillAndExpand">
+                                 VerticalOptions="FillAndExpand">-->
 
                         <ListView ItemsSource="{Binding MoviesDownloaded}" 
                                   VerticalOptions="FillAndExpand"
@@ -142,7 +143,7 @@
                                 </Grid>
                             </ListView.Footer>
                         </ListView>
-                    </ScrollView>
+                    <!--</ScrollView>-->
             <!--Footer-->
             <StackLayout Padding="5"
                              VerticalOptions="End">

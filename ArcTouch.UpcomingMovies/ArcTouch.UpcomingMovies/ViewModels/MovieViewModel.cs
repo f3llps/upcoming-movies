@@ -1,5 +1,4 @@
-﻿using ArcTouch.UpcomingMovies.Enums;
-using ArcTouch.UpcomingMovies.Services.Implementations;
+﻿using ArcTouch.UpcomingMovies.Services.Implementations;
 using Prism.Navigation;
 using System;
 using System.Linq;
@@ -9,6 +8,7 @@ namespace ArcTouch.UpcomingMovies.ViewModels
     public class MovieViewModel : ViewModelBase
     {
         //Attributes
+        private int _id;
         private string _name;
         private string _overview;
         private string _posterImage;
@@ -18,6 +18,12 @@ namespace ArcTouch.UpcomingMovies.ViewModels
         private string _daysLeft;
 
         //Properties
+        public int Id
+        {
+            get { return _id; }
+            set { SetProperty(ref _id, value); }
+        }
+
         public string Name
         {
             get { return _name; }

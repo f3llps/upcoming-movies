@@ -39,6 +39,9 @@
                                FontSize="10" 
                                TextColor="White"/>
                 </StackLayout>
-            </Grid>
+            <StackLayout VerticalOptions="End" HorizontalOptions="Center" HeightRequest="100">
+                <Button Text="Invite a friend!" Command="{Binding InviteFriendCommand }"/>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
