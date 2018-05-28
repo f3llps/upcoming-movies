@@ -1,6 +1,11 @@
 # ArcTouch 
 Upcoming Movies by Fellipe Versiani
 
+<p align="center">
+  <img src="https://preview.ibb.co/fOPYyJ/1jpeg.jpg" width="350"/>
+  <img src="https://preview.ibb.co/d64oXd/2jpeg.jpg" width="350"/>
+</p>
+
 ## Special build instructions:
 Tested with Genymotion (Samgung Galaxy S8 - 8.0 - API 26 - 1440x2960) and with Visual Studio 2017 emullators (Android_Accelarate_x86_Nougat[Android 7.1 - API 25])
 
