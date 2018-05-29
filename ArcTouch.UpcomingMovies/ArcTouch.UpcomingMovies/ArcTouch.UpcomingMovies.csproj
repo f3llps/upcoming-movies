@@ -10,13 +10,14 @@
     <None Remove="Resources\arcTouchLogo.png" />
     <None Remove="Resources\english.png" />
     <None Remove="Resources\french.png" />
-    <None Remove="Resources\Loading.gif" />
+    <None Remove="Resources\loading.gif" />
     <None Remove="Resources\portuguese.png" />
     <None Remove="Resources\spanish.png" />
     <None Remove="Resources\TMDbLogo.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\loading.gif" />
     <EmbeddedResource Include="Resources\portuguese.png" />
   </ItemGroup>
 
@@ -30,7 +31,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\english.png" />
-    <EmbeddedResource Include="Resources\Loading.gif" />
   </ItemGroup>
 
   <ItemGroup>

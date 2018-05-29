@@ -39,23 +39,23 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             _inMemoryTMDbService = inMemoryTMDbService;
 
             if (CrossConnectivity.Current.IsConnected)
-                 Initialize();
+                Initialize();
             else
-            {
-                var toastConfig = new ToastConfig("Not conected.");
-                toastConfig.SetDuration(4000);
-                toastConfig.SetPosition(ToastPosition.Top);
-                toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(47, 79, 79));
-                UserDialogs.Instance.Toast(toastConfig);
-            }
+                CallToolTip("Not Connected");
         }
 
+        //Methods
+        /// <summary>
+        /// Initialize the first page list of movies with genres already translated. Method called by class constructor.
+        /// </summary>
         public async void Initialize()
         {
             await InitializeAsync();
         }
 
-        //Methods
+        /// <summary>
+        /// Initialize the first page list of movies with genres already translated 
+        /// </summary>
         public async Task InitializeAsync()
         {
             if (!InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded.Any())
@@ -70,6 +70,19 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             }
         }
 
+        /// <summary>
+        /// Show the toast notification
+        /// </summary>
+        /// <param name="message">Message of notification</param>
+        public void CallToolTip(string message)
+        {
+            var toastConfig = new ToastConfig(message);
+            toastConfig.SetDuration(5000); // Five seconds
+            toastConfig.SetPosition(ToastPosition.Bottom);
+            toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(47, 79, 79));
+            UserDialogs.Instance.Toast(toastConfig);
+        }
+
         //Commands
         public DelegateCommand<string> OnUpdateLanguageClickedCommand
         {
@@ -77,14 +90,9 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             {
                 return new DelegateCommand<string>(async (language) =>
                 {
-
                     if (CrossConnectivity.Current.IsConnected)
                     {
-                        var toastConfig = new ToastConfig(language);
-                        toastConfig.SetDuration(4000);
-                        toastConfig.SetPosition(ToastPosition.Top);
-                        toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(47, 79, 79));
-                        UserDialogs.Instance.Toast(toastConfig);
+                        CallToolTip(language);
 
                         switch (language)
                         {
@@ -113,11 +121,7 @@ namespace ArcTouch.UpcomingMovies.ViewModels
                     }
                     else
                     {
-                        var toastConfig = new ToastConfig("Not conected.");
-                        toastConfig.SetDuration(4000);
-                        toastConfig.SetPosition(ToastPosition.Top);
-                        toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(47, 79, 79));
-                        UserDialogs.Instance.Toast(toastConfig);
+                        CallToolTip("Not Connected");
                     }
                 });
             }
@@ -129,12 +133,21 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             {
                 return new DelegateCommand<MovieViewModel>((selectedUpcomingMovie) =>
                 {
-                    NavigationParameters parameters = new NavigationParameters
+                    if (CrossConnectivity.Current.IsConnected)
                     {
-                        { "selectedUpcomingMovie", selectedUpcomingMovie }
-                    };
-                    if (selectedUpcomingMovie != null)
-                        _navigationService.NavigateAsync("DetailsPage", parameters);
+
+                        NavigationParameters parameters = new NavigationParameters
+                        {
+                            { "selectedUpcomingMovie", selectedUpcomingMovie }
+                        };
+
+                        if (selectedUpcomingMovie != null)
+                            _navigationService.NavigateAsync("DetailsPage", parameters);
+                    }
+                    else
+                    {
+                        CallToolTip("Not Connected");
+                    }
                 });
             }
         }
@@ -146,17 +159,14 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             {
                 return new DelegateCommand<MovieViewModel>(async (appearingUpcomingMovie) =>
                 {
-                    //if (InMemoryTMDbServiceViewModel.ActualPage != 1)
-                    //{
-                        var isLastMovieDownloaded = (InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded.LastOrDefault().Id == appearingUpcomingMovie.Id) ? true : false;
-                        if (!IsBusy && InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded.Any() && isLastMovieDownloaded)
-                        {
-                            IsBusy = true;
-                            await _inMemoryTMDbService.GetUpcomingMoviesByPageAsync(InMemoryTMDbServiceViewModel.ActualPage);
-                            MoviesDownloaded = new ObservableCollection<MovieViewModel>(InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded);
-                            IsBusy = false;
-                        }
-                    //}
+                    var isLastMovieDownloaded = (InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded.LastOrDefault().Id == appearingUpcomingMovie.Id) ? true : false;
+                    if (!IsBusy && InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded.Any() && isLastMovieDownloaded)
+                    {
+                        IsBusy = true;
+                        await _inMemoryTMDbService.GetUpcomingMoviesByPageAsync(InMemoryTMDbServiceViewModel.ActualPage);
+                        MoviesDownloaded = new ObservableCollection<MovieViewModel>(InMemoryTMDbServiceViewModel.UpcomingMoviesDownloaded);
+                        IsBusy = false;
+                    }
                 });
             }
         }
@@ -187,11 +197,7 @@ namespace ArcTouch.UpcomingMovies.ViewModels
                  }
                  else
                  {
-                     var toastConfig = new ToastConfig("Not conected.");
-                     toastConfig.SetDuration(4000);
-                     toastConfig.SetPosition(ToastPosition.Top);
-                     toastConfig.SetBackgroundColor(System.Drawing.Color.FromArgb(47, 79, 79));
-                     UserDialogs.Instance.Toast(toastConfig);
+                     CallToolTip("Not Connected");
                  }
              });
             }

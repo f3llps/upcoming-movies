@@ -8,7 +8,7 @@ namespace ArcTouch.UpcomingMovies.ViewModels
 {
     public class DetailsPageViewModel : ViewModelBase
     {
-        //Attribues
+        //Attributes
         INavigationService _navigationService;
         private MovieViewModel _upcomingMovie;
         private string _name;
@@ -54,6 +54,10 @@ namespace ArcTouch.UpcomingMovies.ViewModels
         }
 
         //Methods
+        /// <summary>
+        /// Navagation from MainPage to DetailsPage
+        /// </summary>
+        /// <param name="parameters">Contains a MovieViewModel</param>
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
             UpcomingMovie = parameters["selectedUpcomingMovie"] as MovieViewModel;
@@ -62,9 +66,13 @@ namespace ArcTouch.UpcomingMovies.ViewModels
             Overview =  AppResources.Overview + UpcomingMovie.Overview;
             Name = AppResources.Name + UpcomingMovie.Name;
         }
+
+        /// <summary>
+        /// Share movie with a friend
+        /// </summary>
         public async Task InveteFriend()
         {
-            var a = new ShareMessage { Title = "Let's watch the release of this movie?", Text = Name, Url = UpcomingMovie.PosterImage };
+            var a = new ShareMessage { Title = "Upcoming Movie", Text = $"Let's watch the release of {UpcomingMovie.Name} ? {Overview}", Url = UpcomingMovie.PosterImage };
             await CrossShare.Current.Share(a, null);
         }
 

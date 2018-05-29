@@ -14,13 +14,12 @@
                           Orientation="Horizontal"
                           VerticalOptions="Start" 
                           HorizontalOptions="FillAndExpand">
-                
+
                 <ffimageloading:CachedImage Source="resource://ArcTouch.UpcomingMovies.Resources.TMDbLogo.png"
 			                                Aspect="AspectFit"
 	                                        RetryCount = "0"
 	                                        RetryDelay = "350"
 	                                        TransparencyEnabled = "False"/>
-               
                 <Label Text="Upcoming Movies"
                        HorizontalTextAlignment="Center" 
                        VerticalTextAlignment="Center"
@@ -79,40 +78,33 @@
                 </ffimageloading:CachedImage>
             </StackLayout>
             <!--Search Bar-->
-                <StackLayout VerticalOptions="Start">
-                    <SearchBar Placeholder= "Search movie by name" 
-                               HorizontalOptions="FillAndExpand"
-                               VerticalOptions="Start">
-                        <SearchBar.Behaviors>
-                            <behaviors:EventToCommandBehavior EventName="TextChanged" 
-                                                                Command="{Binding SearchUpcomingMovieCommand}"
-                                                                EventArgsParameterPath="NewTextValue"/>
-                        </SearchBar.Behaviors>
-                    </SearchBar>
-                </StackLayout>
+            <StackLayout VerticalOptions="Start">
+                <SearchBar Placeholder= "Search movie by name" 
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="Start">
+                    <SearchBar.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="TextChanged" 
+                                                          Command="{Binding SearchUpcomingMovieCommand}"
+                                                          EventArgsParameterPath="NewTextValue"/>
+                    </SearchBar.Behaviors>
+                </SearchBar>
+            </StackLayout>
+            <StackLayout VerticalOptions="FillAndExpand">
                 <!--Upcoming Movies Listing-->
-            <StackLayout VerticalOptions="FillAndExpand"                                  
-> 
-                    <!--<ScrollView  Padding="3"
-                                 HorizontalOptions="Center"
-                                 VerticalOptions="FillAndExpand">-->
-
-                        <ListView ItemsSource="{Binding MoviesDownloaded}" 
-                                  VerticalOptions="FillAndExpand"
-                                  HorizontalOptions="FillAndExpand"
-                                  HasUnevenRows ="False"
-                                  RowHeight="260"
-                                  SeparatorColor="SlateGray"
-
-                                  CachingStrategy="RecycleElement">
-                            <ListView.Behaviors>
-                                <behaviors:EventToCommandBehavior EventName="ItemTapped" 
-                                                                  Command="{Binding SelectUpcomingMovieCommand}" 
-                                                                  EventArgsParameterPath="Item"/>
-
-                                <behaviors:EventToCommandBehavior EventName="ItemAppearing" 
-                                                                  Command="{Binding ItemAppearingUpcomingMovieCommand}" 
-                                                                  EventArgsParameterPath="Item"/>
+                <ListView ItemsSource="{Binding MoviesDownloaded}" 
+                          VerticalOptions="FillAndExpand"
+                          HorizontalOptions="FillAndExpand"
+                          HasUnevenRows ="False"
+                          RowHeight="260"
+                          SeparatorColor="SlateGray"
+                          CachingStrategy="RecycleElement">
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="ItemTapped" 
+                                                          Command="{Binding SelectUpcomingMovieCommand}" 
+                                                          EventArgsParameterPath="Item"/>
+                        <behaviors:EventToCommandBehavior EventName="ItemAppearing" 
+                                                          Command="{Binding ItemAppearingUpcomingMovieCommand}" 
+                                                          EventArgsParameterPath="Item"/>
                             </ListView.Behaviors>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -143,18 +135,16 @@
                                 </Grid>
                             </ListView.Footer>
                         </ListView>
-                    <!--</ScrollView>-->
-            <!--Footer-->
-            <StackLayout Padding="5"
+                <!--Footer-->
+                <StackLayout Padding="5"
                              VerticalOptions="End">
-                <ffimageloading:CachedImage Source="resource://ArcTouch.UpcomingMovies.Resources.ArcTouchLogo.png" 
+                    <ffimageloading:CachedImage Source="resource://ArcTouch.UpcomingMovies.Resources.ArcTouchLogo.png" 
 			                                    Aspect="AspectFit"
 	                                            RetryCount = "0"
 	                                            RetryDelay = "250"
 	                                            TransparencyEnabled = "False"/>
                 </StackLayout>
             </StackLayout>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

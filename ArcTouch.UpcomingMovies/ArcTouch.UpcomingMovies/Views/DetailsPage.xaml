@@ -13,6 +13,8 @@
 	                                            RetryDelay = "100"
    	                                            TransparencyEnabled = "False"
                                                 Aspect="AspectFit"
+                                                LoadingPlaceholder ="resource://ArcTouch.UpcomingMovies.Resources.loading.gif"
+                                                ErrorPlaceholder = "resource://ArcTouch.UpcomingMovies.Resources.404.gif"
                                                 DownsampleToViewSize="True">
             </ffimageloading:CachedImage>
                 <StackLayout>
