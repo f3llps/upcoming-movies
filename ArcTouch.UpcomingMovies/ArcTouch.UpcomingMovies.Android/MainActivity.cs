@@ -5,7 +5,6 @@ using Android.OS;
 using FFImageLoading.Forms.Droid;
 using Prism;
 using Prism.Ioc;
-using Xamarin.Forms;
 
 namespace ArcTouch.UpcomingMovies.Droid
 {
@@ -29,10 +28,9 @@ namespace ArcTouch.UpcomingMovies.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             CachedImageRenderer.Init(true);
-            //UserDialogs.Init(() => (Activity)Instance);
-
-            UserDialogs.Init(() => (Activity)Forms.Context);
-            LoadApplication(new App(new AndroidInitializer()));
+            UserDialogs.Init(() => (Activity)Android.App.Application.Context);
+            var app = new App(new AndroidInitializer());
+            LoadApplication(app);
         }
     }
 
