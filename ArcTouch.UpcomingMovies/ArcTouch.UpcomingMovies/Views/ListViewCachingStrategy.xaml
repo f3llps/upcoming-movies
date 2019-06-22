@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ArcTouch.UpcomingMovies.Views.ListViewCachingStrategy">
+    <Grid RowSpacing = "0" 
+          ColumnSpacing="0"  
+          VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+         </Grid.RowDefinitions>
+                <ffimageloading:CachedImage x:Name="BackdropImage"
+                                    Aspect="AspectFill"
+                                    HeightRequest="260"
+                                    DownsampleToViewSize="True"
+                                    RetryCount = "5"
+                                    Margin="0"
+                                    RetryDelay = "500"
+                                    FadeAnimationEnabled="True"
+                                    FadeAnimationForCachedImages="True"
+                                    TransparencyEnabled = "False"
+                                    LoadingPlaceholder ="resource://ArcTouch.UpcomingMovies.Resources.loading.gif"
+                                    ErrorPlaceholder = "resource://ArcTouch.UpcomingMovies.Resources.404.gif"
+                                    HorizontalOptions="CenterAndExpand"
+                                    VerticalOptions="CenterAndExpand"/>
+        <BoxView Color="Black"  
+                 HeightRequest="55"
+                 Opacity="0.6" 
+                 VerticalOptions="EndAndExpand"
+                 Margin="0,0,0,10"/>
+        <Grid RowSpacing = "0" 
+              ColumnSpacing="0" 
+              VerticalOptions="EndAndExpand"
+              Margin="0,0,0,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="12"/>
+            </Grid.RowDefinitions>
+            <Label  Grid.Row="0" 
+                    Margin="10, 0, 0, 0"
+                    Text="{Binding Name}" 
+                    FontAttributes="Bold" 
+                    FontSize="Small" 
+                    TextColor="White" 
+                    HorizontalOptions="Start" />
+            <Label Grid.Row="1" 
+                   Margin="10,0,0,0"
+                   FontSize="Micro" 
+                   TextColor="White" 
+                   Text="{Binding ReleaseDate}" 
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="Start"/>
+            <Label Grid.Row="2" 
+                   Text="{Binding Genres}" 
+                   FontSize="Micro"
+                   Margin="10,0,0,0"    
+                   TextColor="White" 
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="Start"/>
+            <Label Grid.Row="2" 
+                   Text="{Binding DaysLeft}" 
+                   FontSize="Micro"
+                   Margin="10,0,0,0"    
+                   TextColor="White" 
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="End"/>
+        </Grid>
+    </Grid>
+</ContentView>

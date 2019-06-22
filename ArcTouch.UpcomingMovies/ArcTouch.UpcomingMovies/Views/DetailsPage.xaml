@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ArcTouch.UpcomingMovies.Views.DetailsPage">
+    <ContentPage.Content>
+            <Grid VerticalOptions="FillAndExpand" 
+                  HorizontalOptions="FillAndExpand">
+            <ffimageloading:CachedImage Source="{Binding UpcomingMovie.PosterImage}"  
+	                                            RetryCount = "3"
+	                                            RetryDelay = "100"
+   	                                            TransparencyEnabled = "False"
+                                                Aspect="AspectFit"
+                                                LoadingPlaceholder ="resource://ArcTouch.UpcomingMovies.Resources.loading.gif"
+                                                ErrorPlaceholder = "resource://ArcTouch.UpcomingMovies.Resources.404.gif"
+                                                DownsampleToViewSize="True">
+            </ffimageloading:CachedImage>
+                <StackLayout>
+                        <BoxView Color="Black" 
+                                 HorizontalOptions="FillAndExpand" 
+                                 VerticalOptions="CenterAndExpand" 
+                                 HeightRequest="200" 
+                                 Margin="30, 0, 30, 0" 
+                                 Opacity="0.7"/>
+                </StackLayout>
+                <StackLayout VerticalOptions="CenterAndExpand" 
+                             HorizontalOptions="StartAndExpand" 
+                             Padding="35, 10, 35, 10">
+                        <Label Text="{Binding Name}" 
+                               FontSize="10" 
+                               TextColor="White"/>
+                        <Label Text="{Binding ReleaseDate}" 
+                               FontSize="10" 
+                               TextColor="White"/>
+                        <Label Text="{Binding Genres}" 
+                               FontSize="10" 
+                               TextColor="White" />
+                        <Label Text="{Binding Overview}" 
+                               FontSize="10" 
+                               TextColor="White"/>
+                </StackLayout>
+            <StackLayout VerticalOptions="End" HorizontalOptions="Center" HeightRequest="100">
+                <Button Text="Invite a friend!" Command="{Binding InviteFriendCommand }"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
